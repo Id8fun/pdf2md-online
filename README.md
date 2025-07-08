@@ -69,7 +69,7 @@ Convert PDF files to Markdown instantly, securely, and 100% in your browser. No 
 ## 📦 Usage
 1. Clone the repo:
    ```bash
-   git clone https://github.com/mrmps/pdf2md
+   git clone https://github.com/Id8fun/pdf2md-online
    cd pdf2md
    ```
 2. Install dependencies:
@@ -96,7 +96,7 @@ Convert PDF files to Markdown instantly, securely, and 100% in your browser. No 
    ```bash
    yarn dev
    ```
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:3000](http://localhost:3000) or [https://pdf2md.id8.fun](https://pdf2md.id8.fun) in your browser
 
 ---
 
@@ -115,4 +115,4 @@ If you found this project useful, please **star the repo** and share it with oth
 
 ---
 
-Made with ❤️ by Michael Ryaboy and the open-source community. 
+Made with ❤️ by Michael Ryaboy and the open-source community.

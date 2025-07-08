@@ -3,7 +3,7 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 
 export const metadata: Metadata = {
-  title: 'PDF to Markdown Converter – Free Unlimited, Secure, 100% Browser-Based',
+  title: 'PDF to Markdown Converter – Free Unlimited, Secure, 100% Browser-Based - pdf2md.id8.fun',
   description:
     'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool.',
   keywords: [
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     'PDF to markdown secure',
     'PDF to markdown browser',
   ],
-  authors: [{ name: 'Michael Ryaboy' }],
-  creator: 'Michael Ryaboy',
-  publisher: 'Michael Ryaboy',
+  authors: [{ name: '0xlauyu' }],
+  creator: '0xlauyu',
+    publisher: '0xlauyu',
   applicationName: 'PDF to Markdown Converter',
   category: 'Utilities',
   robots: {
@@ -37,13 +37,13 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: 'https://pdftomarkdown.co/',
+    canonical: 'https://pdf2md.id8.fun/',
   },
   openGraph: {
     title: 'PDF to Markdown Converter – Free Unlimited, Secure, 100% Browser-Based',
     description:
       'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool.',
-    url: 'https://pdftomarkdown.co/',
+    url: 'https://pdf2md.id8.fun/',
     siteName: 'PDF to Markdown Converter',
     type: 'website',
     locale: 'en_US',
