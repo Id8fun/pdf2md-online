@@ -116,83 +116,212 @@ export function MarkdownEditor({
   <meta charset="utf-8">
   <title>${fileName?.replace(/\.pdf$/i, "") || "Document"}</title>
   <style>
+    @page {
+      size: A4;
+      margin: 2.54cm 2.54cm 2.54cm 2.54cm;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    html {
+      font-size: 12pt;
+    }
+    
     body {
-      font-family: 'Times New Roman', serif;
-      line-height: 1.6;
-      max-width: 800px;
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      color: #000000;
+      background: white;
+      margin: 0;
+      padding: 0;
+      width: 21cm;
+      min-height: 29.7cm;
       margin: 0 auto;
-      padding: 20px;
-      color: #333;
+      background: white;
+      box-shadow: none;
     }
+    
+    .page {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 2.54cm;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      page-break-after: always;
+    }
+    
     h1 {
-      color: #2c3e50;
-      border-bottom: 2px solid #3498db;
-      padding-bottom: 10px;
-      font-size: 24px;
-      margin-top: 30px;
-      margin-bottom: 20px;
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 18pt;
+      font-weight: bold;
+      color: #1f4e79;
+      margin-top: 24pt;
+      margin-bottom: 12pt;
+      line-height: 1.3;
+      page-break-after: avoid;
     }
+    
     h2 {
-      color: #34495e;
-      border-bottom: 1px solid #bdc3c7;
-      padding-bottom: 5px;
-      font-size: 20px;
-      margin-top: 25px;
-      margin-bottom: 15px;
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 14pt;
+      font-weight: bold;
+      color: #2f5597;
+      margin-top: 18pt;
+      margin-bottom: 6pt;
+      line-height: 1.3;
+      page-break-after: avoid;
     }
+    
     h3 {
-      color: #7f8c8d;
-      font-size: 16px;
-      margin-top: 20px;
-      margin-bottom: 10px;
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 12pt;
+      font-weight: bold;
+      color: #1f4e79;
+      margin-top: 12pt;
+      margin-bottom: 6pt;
+      line-height: 1.3;
+      page-break-after: avoid;
     }
+    
+    h4, h5, h6 {
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 11pt;
+      font-weight: bold;
+      color: #1f4e79;
+      margin-top: 12pt;
+      margin-bottom: 3pt;
+      line-height: 1.3;
+      page-break-after: avoid;
+    }
+    
     p {
-      margin-bottom: 12px;
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      margin-top: 0;
+      margin-bottom: 6pt;
       text-align: justify;
+      orphans: 2;
+      widows: 2;
     }
+    
+    ul, ol {
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      margin-top: 6pt;
+      margin-bottom: 6pt;
+      padding-left: 18pt;
+    }
+    
+    li {
+      margin-bottom: 3pt;
+      orphans: 2;
+      widows: 2;
+    }
+    
     code {
-      background-color: #f8f9fa;
-      padding: 2px 4px;
-      border-radius: 3px;
-      font-family: 'Courier New', monospace;
-      font-size: 90%;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 10pt;
+      background-color: #f2f2f2;
+      padding: 1pt 3pt;
+      border-radius: 2pt;
+      border: 1pt solid #d4d4d4;
     }
+    
     pre {
-      background-color: #f8f9fa;
-      padding: 12px;
-      border-radius: 5px;
-      border-left: 4px solid #3498db;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 9pt;
+      background-color: #f8f8f8;
+      border: 1pt solid #d4d4d4;
+      border-radius: 3pt;
+      padding: 12pt;
+      margin: 12pt 0;
       overflow-x: auto;
-      margin: 15px 0;
+      line-height: 1.4;
+      page-break-inside: avoid;
     }
+    
     pre code {
       background: none;
+      border: none;
       padding: 0;
+      font-size: inherit;
     }
-    ul, ol {
-      margin-left: 20px;
-      margin-bottom: 15px;
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 12pt 0;
+      font-size: 10pt;
+      page-break-inside: avoid;
     }
-    li {
-      margin-bottom: 5px;
+    
+    th, td {
+      border: 1pt solid #d4d4d4;
+      padding: 6pt 8pt;
+      text-align: left;
+      vertical-align: top;
     }
+    
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    
     a {
-      color: #3498db;
-      text-decoration: none;
-    }
-    a:hover {
+      color: #0563c1;
       text-decoration: underline;
     }
+    
     strong {
       font-weight: bold;
     }
+    
     em {
       font-style: italic;
+    }
+    
+    blockquote {
+      margin: 12pt 0;
+      padding: 6pt 12pt;
+      border-left: 3pt solid #d4d4d4;
+      background-color: #f9f9f9;
+      font-style: italic;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 6pt 0;
+    }
+    
+    hr {
+      border: none;
+      border-top: 1pt solid #d4d4d4;
+      margin: 18pt 0;
+    }
+    
+    @media print {
+      body {
+        box-shadow: none;
+      }
+      
+      .page {
+        box-shadow: none;
+        page-break-after: always;
+      }
     }
   </style>
 </head>
 <body>
-${htmlContent}
+  <div class="page">
+    ${htmlContent}
+  </div>
 </body>
 </html>`
               

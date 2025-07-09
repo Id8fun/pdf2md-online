@@ -28,9 +28,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative">
-      {/* Language Switcher - Top of page */}
-      <div className="absolute top-4 right-4 z-20">
-        {isClient && <LanguageSwitcher />}
+      {/* Language Switcher - Aligned with content */}
+      <div className="container mx-auto px-4 max-w-4xl relative z-20">
+        <div className="flex justify-end pt-4">
+          {isClient && <LanguageSwitcher />}
+        </div>
       </div>
       
       {/* Dynamic Gradient Background */}
