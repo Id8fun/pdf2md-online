@@ -60,7 +60,7 @@ export function ShareButton({ className }: ShareButtonProps) {
     }
 
     // Try native sharing first (mobile)
-    if (typeof navigator !== 'undefined' && navigator.share && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (typeof navigator !== 'undefined' && 'share' in navigator && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       try {
         await navigator.share({
           title: shareTitle,
@@ -88,7 +88,7 @@ export function ShareButton({ className }: ShareButtonProps) {
   }
 
   const handleNativeShare = async () => {
-    if (typeof navigator !== 'undefined' && navigator.share) {
+    if (typeof navigator !== 'undefined' && 'share' in navigator) {
       try {
         await navigator.share({
           title: shareTitle,
@@ -117,7 +117,7 @@ export function ShareButton({ className }: ShareButtonProps) {
         </DialogHeader>
         <div className="space-y-4">
           {/* Native Share Button (Mobile) */}
-          {typeof navigator !== 'undefined' && navigator.share && (
+          {typeof navigator !== 'undefined' && 'share' in navigator && (
             <Button
               onClick={handleNativeShare}
               className="w-full h-10 bg-gray-100 hover:bg-gray-200 text-gray-900 border border-gray-300"
