@@ -19,6 +19,13 @@
   "maxFileSize": "Maximum file size: 10MB",
   "supportedFormats": "Supported formats: PDF",
   "language": "Language",
+  "editMarkdown": "Edit Markdown",
+  "edit": "Edit",
+  "editMarkdownPlaceholder": "Edit your Markdown content here...",
+  "cancel": "Cancel",
+  "downloadMd": "Download MD",
+  "downloadWord": "Download Word",
+  "saveChanges": "Save Changes",
   "faq": {
     "title": "Frequently Asked Questions",
     "q1": "How does the PDF to Markdown conversion work?",

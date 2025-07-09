@@ -6,11 +6,12 @@ import { FileUploader } from "@/components/file-uploader"
 import { MarkdownPreview } from "@/components/markdown-preview"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { FileText, Code, ArrowRight} from "lucide-react"
+import { FileText, Code, ArrowRight, Edit } from "lucide-react"
 import { FaqSection } from "@/components/faq-section"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { GitHubStarButton } from "@/components/github-star-button"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { MarkdownEditor } from "@/components/markdown-editor"
 import "@/i18n/client"
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
   const [isConverting, setIsConverting] = useState(false)
   const [fileName, setFileName] = useState<string | null>(null)
   const [isClient, setIsClient] = useState(false)
+  const [isEditorOpen, setIsEditorOpen] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
@@ -26,6 +28,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative">
+      {/* Language Switcher - Top of page */}
+      <div className="absolute top-4 right-4 z-20">
+        {isClient && <LanguageSwitcher />}
+      </div>
+      
       {/* Dynamic Gradient Background */}
       <div className="gradient-bg">
         <svg className="fixed top-0 left-0 w-0 h-0">
@@ -48,10 +55,6 @@ export default function Home() {
       </div>
       
       <div className="container mx-auto py-16 px-4 max-w-4xl relative z-10">
-        {/* Language Switcher */}
-        <div className="flex justify-end mb-8">
-          {isClient && <LanguageSwitcher />}
-        </div>
         <div className="relative">
           
           {/* Header content */}
@@ -116,6 +119,13 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
+                  <Button
+                    onClick={() => setIsEditorOpen(true)}
+                    className="h-9 font-medium bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    <Edit className="mr-1.5 h-4 w-4" />
+                    {isClient ? t('edit') : 'Edit'}
+                  </Button>
                   <Button
                     onClick={() => {
                       navigator.clipboard.writeText(markdown || "")
@@ -200,6 +210,17 @@ export default function Home() {
           </p>
         </footer>
       </div>
+      
+      {/* Markdown Editor Modal */}
+      {markdown && (
+        <MarkdownEditor
+          isOpen={isEditorOpen}
+          onClose={() => setIsEditorOpen(false)}
+          initialMarkdown={markdown}
+          onSave={(editedMarkdown) => setMarkdown(editedMarkdown)}
+          fileName={fileName || undefined}
+        />
+      )}
     </main>
   )
 }

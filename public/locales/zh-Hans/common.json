@@ -19,6 +19,13 @@
   "maxFileSize": "最大文件大小：10MB",
   "supportedFormats": "支持的格式：PDF",
   "language": "语言",
+  "editMarkdown": "编辑 Markdown",
+  "edit": "编辑",
+  "editMarkdownPlaceholder": "在此编辑您的 Markdown 内容...",
+  "cancel": "取消",
+  "downloadMd": "下载 MD",
+  "downloadWord": "下载 Word",
+  "saveChanges": "保存更改",
   "faq": {
     "title": "常见问题",
     "q1": "PDF转Markdown是如何工作的？",
