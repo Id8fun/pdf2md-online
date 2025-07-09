@@ -50,34 +50,70 @@ export function MarkdownEditor({
   }
 
   const handleDownloadWord = () => {
-    // Create a temporary container to render the markdown
+    // Create a temporary container to render the markdown with proper styling
     const tempContainer = document.createElement('div')
     tempContainer.style.position = 'absolute'
     tempContainer.style.left = '-9999px'
     tempContainer.style.top = '-9999px'
-    tempContainer.style.width = '800px'
-    tempContainer.className = 'prose dark:prose-invert max-w-none break-words'
+    tempContainer.style.width = '210mm' // A4 width
+    tempContainer.style.padding = '25.4mm' // A4 margins
+    tempContainer.style.backgroundColor = 'white'
+    tempContainer.style.fontFamily = 'Calibri, Arial, sans-serif'
+    tempContainer.style.fontSize = '11pt'
+    tempContainer.style.lineHeight = '1.5'
+    tempContainer.style.color = '#000000'
+    
+    // Add Tailwind prose styles manually
+    tempContainer.innerHTML = `
+      <style>
+        .prose { max-width: none; }
+        .prose h1 { font-size: 18pt; font-weight: bold; color: #1f4e79; margin: 24pt 0 12pt 0; line-height: 1.3; }
+        .prose h2 { font-size: 14pt; font-weight: bold; color: #2f5597; margin: 18pt 0 6pt 0; line-height: 1.3; }
+        .prose h3 { font-size: 12pt; font-weight: bold; color: #1f4e79; margin: 12pt 0 6pt 0; line-height: 1.3; }
+        .prose h4, .prose h5, .prose h6 { font-size: 11pt; font-weight: bold; color: #1f4e79; margin: 12pt 0 3pt 0; line-height: 1.3; }
+        .prose p { margin: 0 0 6pt 0; text-align: justify; }
+        .prose ul, .prose ol { margin: 6pt 0; padding-left: 18pt; }
+        .prose li { margin-bottom: 3pt; }
+        .prose code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt; background-color: #f2f2f2; padding: 1pt 3pt; border-radius: 2pt; border: 1pt solid #d4d4d4; }
+        .prose pre { font-family: Consolas, 'Courier New', monospace; font-size: 9pt; background-color: #f8f8f8; border: 1pt solid #d4d4d4; border-radius: 3pt; padding: 12pt; margin: 12pt 0; overflow-x: auto; line-height: 1.4; }
+        .prose pre code { background: none; border: none; padding: 0; font-size: inherit; }
+        .prose table { border-collapse: collapse; width: 100%; margin: 12pt 0; font-size: 10pt; }
+        .prose th, .prose td { border: 1pt solid #d4d4d4; padding: 6pt 8pt; text-align: left; vertical-align: top; }
+        .prose th { background-color: #f2f2f2; font-weight: bold; }
+        .prose a { color: #0563c1; text-decoration: underline; }
+        .prose strong { font-weight: bold; }
+        .prose em { font-style: italic; }
+        .prose blockquote { margin: 12pt 0; padding: 6pt 12pt; border-left: 3pt solid #d4d4d4; background-color: #f9f9f9; font-style: italic; }
+        .prose img { max-width: 100%; height: auto; margin: 6pt 0; }
+        .prose hr { border: none; border-top: 1pt solid #d4d4d4; margin: 18pt 0; }
+      </style>
+      <div class="prose"></div>
+    `
+    
+    const proseContainer = tempContainer.querySelector('.prose')
     document.body.appendChild(tempContainer)
 
     // Import ReactMarkdown and render
     import('react-markdown').then(({ default: ReactMarkdown }) => {
       import('remark-gfm').then(({ default: remarkGfm }) => {
         import('react-dom/client').then(({ createRoot }) => {
-          const root = createRoot(tempContainer)
+          const root = createRoot(proseContainer!)
           
-          // Render the markdown using the same configuration as MarkdownPreview
+          // Render the markdown using the exact same configuration as MarkdownPreview
           root.render(
             React.createElement(ReactMarkdown, {
               remarkPlugins: [remarkGfm],
               components: {
                 pre: ({ node, ...props }) => React.createElement('pre', {
                   ...props,
-                  className: 'overflow-x-auto p-4 bg-gray-100 rounded-md my-4 text-sm'
+                  className: 'overflow-x-auto p-4 bg-muted rounded-md my-4 text-sm [overflow-wrap:anywhere]'
                 }),
                 code: ({ node, inline, ...props }: any) => React.createElement('code', {
-                   ...props,
-                   className: inline ? 'bg-gray-100 px-1 py-0.5 rounded break-words text-sm' : 'block overflow-x-auto text-sm'
-                 }),
+                  ...props,
+                  className: inline
+                    ? 'bg-muted px-1 py-0.5 rounded break-words text-sm'
+                    : 'block overflow-x-auto [overflow-wrap:anywhere] text-sm'
+                }),
                 table: ({ children }) => React.createElement('div', {
                   className: 'my-4 overflow-x-auto'
                 }, React.createElement('table', {
@@ -91,24 +127,24 @@ export function MarkdownEditor({
                   className: 'max-w-full h-auto'
                 })),
                 p: ({ children }) => React.createElement('p', {
-                  className: 'whitespace-pre-wrap break-words'
+                  className: 'whitespace-pre-wrap break-words [overflow-wrap:anywhere]'
                 }, children),
                 a: ({ node, href, children }) => React.createElement('a', {
                   href: href,
                   target: '_blank',
                   rel: 'noopener noreferrer',
-                  className: 'break-words'
+                  className: 'break-words [overflow-wrap:anywhere]'
                 }, children)
               }
             }, markdown)
           )
           
           // Wait for rendering to complete, then extract HTML
-           setTimeout(() => {
-             const htmlContent = tempContainer.innerHTML
-             
-             // Clean up the temporary container
-             document.body.removeChild(tempContainer)
+          setTimeout(() => {
+            const htmlContent = proseContainer!.innerHTML
+            
+            // Clean up the temporary container
+            document.body.removeChild(tempContainer)
              
              const wordDocument = `<!DOCTYPE html>
 <html>
@@ -118,132 +154,108 @@ export function MarkdownEditor({
   <style>
     @page {
       size: A4;
-      margin: 2.54cm 2.54cm 2.54cm 2.54cm;
+      margin: 2.54cm;
     }
     
     * {
       box-sizing: border-box;
     }
     
-    html {
-      font-size: 12pt;
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #1a1a1a;
     }
     
     body {
-      font-family: 'Calibri', 'Arial', sans-serif;
-      font-size: 11pt;
-      line-height: 1.5;
-      color: #000000;
-      background: white;
-      margin: 0;
-      padding: 0;
-      width: 21cm;
-      min-height: 29.7cm;
+      max-width: 210mm;
       margin: 0 auto;
+      padding: 25.4mm;
       background: white;
-      box-shadow: none;
+      min-height: 100vh;
     }
     
-    .page {
-      width: 21cm;
-      min-height: 29.7cm;
-      padding: 2.54cm;
-      margin: 0 auto;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      page-break-after: always;
-    }
-    
+    /* Typography */
     h1 {
-      font-family: 'Calibri', 'Arial', sans-serif;
-      font-size: 18pt;
-      font-weight: bold;
-      color: #1f4e79;
-      margin-top: 24pt;
-      margin-bottom: 12pt;
-      line-height: 1.3;
-      page-break-after: avoid;
+      font-size: 24px;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 32px 0 16px 0;
+      line-height: 1.2;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
     }
     
     h2 {
-      font-family: 'Calibri', 'Arial', sans-serif;
-      font-size: 14pt;
-      font-weight: bold;
-      color: #2f5597;
-      margin-top: 18pt;
-      margin-bottom: 6pt;
+      font-size: 20px;
+      font-weight: 600;
+      color: #334155;
+      margin: 24px 0 12px 0;
       line-height: 1.3;
-      page-break-after: avoid;
     }
     
     h3 {
-      font-family: 'Calibri', 'Arial', sans-serif;
-      font-size: 12pt;
-      font-weight: bold;
-      color: #1f4e79;
-      margin-top: 12pt;
-      margin-bottom: 6pt;
+      font-size: 18px;
+      font-weight: 600;
+      color: #475569;
+      margin: 20px 0 10px 0;
       line-height: 1.3;
-      page-break-after: avoid;
     }
     
     h4, h5, h6 {
-      font-family: 'Calibri', 'Arial', sans-serif;
-      font-size: 11pt;
-      font-weight: bold;
-      color: #1f4e79;
-      margin-top: 12pt;
-      margin-bottom: 3pt;
+      font-size: 16px;
+      font-weight: 600;
+      color: #64748b;
+      margin: 16px 0 8px 0;
       line-height: 1.3;
-      page-break-after: avoid;
     }
     
     p {
-      font-family: 'Calibri', 'Arial', sans-serif;
-      font-size: 11pt;
-      line-height: 1.5;
-      margin-top: 0;
-      margin-bottom: 6pt;
+      margin: 0 0 16px 0;
+      line-height: 1.6;
       text-align: justify;
-      orphans: 2;
-      widows: 2;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
     
+    /* Lists */
     ul, ol {
-      font-family: 'Calibri', 'Arial', sans-serif;
-      font-size: 11pt;
-      line-height: 1.5;
-      margin-top: 6pt;
-      margin-bottom: 6pt;
-      padding-left: 18pt;
+      margin: 16px 0;
+      padding-left: 24px;
+      line-height: 1.6;
     }
     
     li {
-      margin-bottom: 3pt;
-      orphans: 2;
-      widows: 2;
+      margin-bottom: 8px;
     }
     
+    /* Code */
     code {
-      font-family: 'Consolas', 'Courier New', monospace;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
       font-size: 10pt;
-      background-color: #f2f2f2;
-      padding: 1pt 3pt;
-      border-radius: 2pt;
-      border: 1pt solid #d4d4d4;
+      background-color: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+      word-break: break-all;
     }
     
     pre {
-      font-family: 'Consolas', 'Courier New', monospace;
-      font-size: 9pt;
-      background-color: #f8f8f8;
-      border: 1pt solid #d4d4d4;
-      border-radius: 3pt;
-      padding: 12pt;
-      margin: 12pt 0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 10pt;
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 16px;
+      margin: 16px 0;
       overflow-x: auto;
-      line-height: 1.4;
-      page-break-inside: avoid;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
     
     pre code {
@@ -251,77 +263,86 @@ export function MarkdownEditor({
       border: none;
       padding: 0;
       font-size: inherit;
+      word-break: normal;
     }
     
+    /* Tables */
     table {
       border-collapse: collapse;
       width: 100%;
-      margin: 12pt 0;
+      margin: 16px 0;
       font-size: 10pt;
-      page-break-inside: avoid;
     }
     
     th, td {
-      border: 1pt solid #d4d4d4;
-      padding: 6pt 8pt;
+      border: 1px solid #d1d5db;
+      padding: 8px 12px;
       text-align: left;
       vertical-align: top;
+      word-wrap: break-word;
     }
     
     th {
-      background-color: #f2f2f2;
-      font-weight: bold;
+      background-color: #f9fafb;
+      font-weight: 600;
+      color: #374151;
     }
     
+    /* Links */
     a {
-      color: #0563c1;
+      color: #2563eb;
       text-decoration: underline;
+      word-break: break-all;
     }
     
+    /* Text formatting */
     strong {
-      font-weight: bold;
+      font-weight: 700;
     }
     
     em {
       font-style: italic;
     }
     
+    /* Blockquotes */
     blockquote {
-      margin: 12pt 0;
-      padding: 6pt 12pt;
-      border-left: 3pt solid #d4d4d4;
-      background-color: #f9f9f9;
+      margin: 16px 0;
+      padding: 12px 16px;
+      border-left: 4px solid #d1d5db;
+      background-color: #f9fafb;
       font-style: italic;
+      color: #6b7280;
     }
     
+    /* Images */
     img {
       max-width: 100%;
       height: auto;
-      margin: 6pt 0;
+      margin: 16px 0;
+      border-radius: 4px;
     }
     
+    /* Horizontal rules */
     hr {
       border: none;
-      border-top: 1pt solid #d4d4d4;
-      margin: 18pt 0;
+      border-top: 1px solid #e5e7eb;
+      margin: 24px 0;
     }
     
     @media print {
       body {
-        box-shadow: none;
+        padding: 0;
+        margin: 0;
       }
       
-      .page {
-        box-shadow: none;
-        page-break-after: always;
+      @page {
+        margin: 2.54cm;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    ${htmlContent}
-  </div>
+${htmlContent}
 </body>
 </html>`
               
