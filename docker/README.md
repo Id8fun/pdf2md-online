@@ -7,7 +7,7 @@ This Docker Compose setup provides a complete containerized environment for the 
 This Docker setup is based on the following original PDF2MD projects:
 
 - [PDF to Markdown Online Converter](https://www.pdftomarkdown.co/) - The web application
-- [GitHub Repository](https://github.com/mrmps/pdf2md) - The original source code
+- [GitHub Repository](https://github.com/Id8fun/pdf2md-online) - The original source code
 
 ## Quick Start
 
@@ -19,7 +19,7 @@ This Docker setup is based on the following original PDF2MD projects:
 ### 1. Clone and Setup
 
 ```bash
-git clone https://github.com/mrmps/pdf2md.git
+git clone https://github.com/Id8fun/pdf2md-online.git
 cd pdf2md
 
 # Make scripts executable and create directories

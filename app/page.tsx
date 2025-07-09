@@ -164,7 +164,7 @@ export default function Home() {
             <GitHubStarButton />
           </div>
           <p>
-            Made with ❤️ by <a href="https://twitter.com/michael_chomsky" target="_blank" rel="noopener noreferrer" className="text-gray-900 dark:text-white hover:underline">@michael_chomsky</a>. If you found this tool helpful, please consider starring it on
+            Made with ❤️ by <a href="https://twitter.com/0xlauyu" target="_blank" rel="noopener noreferrer" className="text-gray-900 dark:text-white hover:underline">@0xlauyu</a>. If you found this tool helpful, please consider starring it on
             GitHub.
           </p>
         </footer>

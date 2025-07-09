@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Analytics } from '@vercel/analytics/react'
+
 
 export const metadata: Metadata = {
-  title: 'PDF to Markdown Converter – Free Unlimited, Secure, 100% Browser-Based - pdf2md.id8.fun',
+  title: 'PDF to Markdown Converter – Free Unlimited, Secure, AI Translation, Multi-language Support - pdf2md.id8.fun',
   description:
-    'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool.',
+    'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool. With AI translation and multi-language support, it\'s your ultimate PDF to MD file shortcut tool.',
   keywords: [
     'PDF to Markdown',
     'PDF converter',
@@ -26,6 +26,9 @@ export const metadata: Metadata = {
     'PDF to markdown free unlimited',
     'PDF to markdown secure',
     'PDF to markdown browser',
+    'AI translation',
+    'multi-language support',
+    'file shortcut tool',
   ],
   authors: [{ name: '0xlauyu' }],
   creator: '0xlauyu',
@@ -40,16 +43,16 @@ export const metadata: Metadata = {
     canonical: 'https://pdf2md.id8.fun/',
   },
   openGraph: {
-    title: 'PDF to Markdown Converter – Free Unlimited, Secure, 100% Browser-Based',
+    title: 'PDF to Markdown Converter – Free Unlimited, Secure, AI Translation, Multi-language Support',
     description:
-      'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool.',
+      'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool. With AI translation and multi-language support, it\'s your ultimate PDF to MD file shortcut tool.',
     url: 'https://pdf2md.id8.fun/',
     siteName: 'PDF to Markdown Converter',
     type: 'website',
     locale: 'en_US',
     images: [
       {
-        url: '/og.png',
+        url: '/logo.png',
         width: 1200,
         height: 630,
         alt: 'PDF to Markdown Converter',
@@ -58,17 +61,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PDF to Markdown Converter – Free Unlimited, Secure, 100% Browser-Based',
+    title: 'PDF to Markdown Converter – Free Unlimited, Secure, AI Translation, Multi-language Support',
     description:
-      'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool.',
-    images: ['/og.png'],
-    creator: '@michaelchomsky',
-    site: '@michaelchomsky',
+      'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool. With AI translation and multi-language support, it\'s your ultimate PDF to MD file shortcut tool.',
+    images: ['/logo.png'],
+    creator: '@0xlauyu',
+    site: '@0xlauyu',
   },
   icons: {
-    icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>',
-    shortcut: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>',
-    apple: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>',
+    icon: '/logo.ico',
+    shortcut: '/logo.ico',
+    apple: '/logo.png',
   },
   metadataBase: new URL('https://pdftomarkdown.co'),
 }
@@ -82,7 +85,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <Analytics />
+
       </body>
     </html>
   )
