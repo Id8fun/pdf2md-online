@@ -6,11 +6,12 @@ import { FileUploader } from "@/components/file-uploader"
 import { MarkdownPreview } from "@/components/markdown-preview"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { FileText, Code, ArrowRight, Edit, Twitter } from "lucide-react"
+import { FileText, Code, ArrowRight, Edit, Twitter, ArrowLeft, Github } from "lucide-react"
 import { FaqSection } from "@/components/faq-section"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { GitHubStarButton } from "@/components/github-star-button"
 import { LanguageSwitcher } from "@/components/language-switcher"
+import { ShareButton } from "@/components/share-button"
 import { MarkdownEditor } from "@/components/markdown-editor"
 import "@/i18n/client"
 
@@ -28,9 +29,18 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative">
-      {/* Language Switcher - Aligned with content */}
+      {/* Top Navigation */}
       <div className="container mx-auto px-4 max-w-4xl relative z-20">
-        <div className="flex justify-end pt-4">
+        <div className="flex justify-between items-center pt-4">
+          <a 
+            href="https://id8.fun/application/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-200 hover:scale-105"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span className="font-medium">Back</span>
+          </a>
           {isClient && <LanguageSwitcher />}
         </div>
       </div>
@@ -77,7 +87,7 @@ export default function Home() {
                 {isClient ? t('description') : 'Instantly convert PDF documents to perfectly formatted Markdown. Your files never leave your device — everything happens right in your browser.'}
               </p>
               
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4">
                 <Button 
                   className="h-12 px-6 text-sm font-medium bg-black dark:bg-white text-white dark:text-black hover:bg-gray-900 dark:hover:bg-gray-100 transition-colors"
                   onClick={() => {
@@ -88,6 +98,7 @@ export default function Home() {
                   {isClient ? t('convertNow') : 'Convert PDF Now'}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
+                <ShareButton />
                 <GitHubStarButton className="h-12" />
               </div>
             </div>
@@ -204,13 +215,19 @@ export default function Home() {
         </div>
 
         <footer className="mt-20 text-center text-sm text-white/80 drop-shadow-md">
-          <div className="flex justify-center mb-4">
-            <GitHubStarButton />
-          </div>
-          <p className="mb-4">
+          <p className="mb-6">
             I continue to build this project based on Michael Ryaboy's open source project, thanks for open source
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center gap-4">
+            <a 
+              href="https://github.com/0xlauyu/pdf2md" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-200 hover:scale-105"
+            >
+              <Github className="h-4 w-4" />
+              <span className="font-medium">GitHub</span>
+            </a>
             <a 
               href="https://twitter.com/0xlauyu" 
               target="_blank" 

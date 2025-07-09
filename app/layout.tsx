@@ -3,32 +3,30 @@ import './globals.css'
 
 
 export const metadata: Metadata = {
-  title: 'PDF to Markdown Converter – Free Unlimited, Secure, AI Translation, Multi-language Support - pdf2md.id8.fun',
+  title: 'PDF2MD - Transform Your PDFs into Clean Markdown | Free, Secure, Browser-Based Converter',
   description:
-    'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool. With AI translation and multi-language support, it\'s your ultimate PDF to MD file shortcut tool.',
+    'Convert PDF documents to perfectly formatted Markdown instantly in your browser. 100% privacy-focused: files never leave your device. Supports tables, headings, lists, code blocks, and more. Free unlimited conversions with AI-powered text extraction and multi-language support.',
   keywords: [
-    'PDF to Markdown',
-    'PDF converter',
-    'Markdown converter',
-    'browser-based PDF tool',
-    'free unlimited PDF to Markdown',
+    'PDF to Markdown converter',
+    'PDF2MD',
+    'browser-based PDF converter',
+    'free PDF to Markdown',
     'secure PDF conversion',
-    'privacy PDF tool',
-    'open source PDF converter',
-    'PDF to MD',
-    'convert PDF',
-    'markdown export',
-    'no upload PDF converter',
-    'offline PDF tool',
-    'extract PDF text',
-    'PDF to text',
-    'PDF to markdown online',
-    'PDF to markdown free unlimited',
-    'PDF to markdown secure',
-    'PDF to markdown browser',
-    'AI translation',
-    'multi-language support',
-    'file shortcut tool',
+    'privacy-first PDF tool',
+    'offline PDF converter',
+    'PDF to MD online',
+    'markdown export tool',
+    'document converter',
+    'PDF text extraction',
+    'clean markdown format',
+    'no upload required',
+    'client-side PDF processing',
+    'open source converter',
+    'PDF parsing tool',
+    'markdown generator',
+    'document transformation',
+    'PDF utility',
+    'web-based converter'
   ],
   authors: [{ name: '0xlauyu' }],
   creator: '0xlauyu',
@@ -43,11 +41,11 @@ export const metadata: Metadata = {
     canonical: 'https://pdf2md.id8.fun/',
   },
   openGraph: {
-    title: 'PDF to Markdown Converter – Free Unlimited, Secure, AI Translation, Multi-language Support',
+    title: 'PDF2MD - Transform Your PDFs into Clean Markdown',
     description:
-      'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool. With AI translation and multi-language support, it\'s your ultimate PDF to MD file shortcut tool.',
+      'Convert PDF documents to perfectly formatted Markdown instantly in your browser. 100% privacy-focused: files never leave your device. Free unlimited conversions with professional-grade formatting.',
     url: 'https://pdf2md.id8.fun/',
-    siteName: 'PDF to Markdown Converter',
+    siteName: 'PDF2MD',
     type: 'website',
     locale: 'en_US',
     images: [
@@ -61,9 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'PDF to Markdown Converter – Free Unlimited, Secure, AI Translation, Multi-language Support',
+    title: 'PDF2MD - Transform Your PDFs into Clean Markdown',
     description:
-      'Convert PDF files to Markdown instantly in your browser. 100% privacy: your files never leave your device. Supports headings, tables, lists, and more. Fast, free unlimited, and secure PDF to Markdown conversion tool. With AI translation and multi-language support, it\'s your ultimate PDF to MD file shortcut tool.',
+      'Convert PDF documents to perfectly formatted Markdown instantly in your browser. 100% privacy-focused: files never leave your device. Free unlimited conversions with professional-grade formatting.',
     images: ['/logo.png'],
     creator: '@0xlauyu',
     site: '@0xlauyu',
@@ -73,7 +71,7 @@ export const metadata: Metadata = {
     shortcut: '/logo.ico',
     apple: '/logo.png',
   },
-  metadataBase: new URL('https://pdftomarkdown.co'),
+  metadataBase: new URL('https://pdf2md.id8.fun'),
 }
 
 export default function RootLayout({
