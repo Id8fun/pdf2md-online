@@ -1,0 +1,22 @@
+{
+  "title": "حول ملفات PDF إلى Markdown نظيف",
+  "description": "قم بتحويل مستندات PDF فوراً إلى Markdown منسق بشكل مثالي. ملفاتك لا تغادر جهازك أبداً — كل شيء يحدث مباشرة في متصفحك.",
+  "browserBased": "تحويل 100% قائم على المتصفح",
+  "convertNow": "حول PDF الآن",
+  "conversionResult": "نتيجة التحويل",
+  "copy": "نسخ",
+  "download": "تحميل",
+  "preview": "معاينة",
+  "markdown": "Markdown",
+  "copiedToClipboard": "تم نسخ Markdown إلى الحافظة!",
+  "madeWith": "صنع بـ ❤️ بواسطة",
+  "starOnGitHub": "إذا وجدت هذه الأداة مفيدة، يرجى النظر في إعطائها نجمة على GitHub.",
+  "dragAndDrop": "اسحب وأفلت ملف PDF هنا",
+  "orClickToSelect": "أو انقر لتحديد ملف",
+  "selectFile": "اختر ملف",
+  "converting": "جاري التحويل...",
+  "uploadPDF": "رفع PDF",
+  "maxFileSize": "الحد الأقصى لحجم الملف: 10MB",
+  "supportedFormats": "الصيغ المدعومة: PDF",
+  "language": "اللغة"
+}

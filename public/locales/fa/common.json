@@ -1,0 +1,22 @@
+{
+  "title": "فایل‌های PDF خود را به Markdown تمیز تبدیل کنید",
+  "description": "اسناد PDF را فوراً به Markdown با فرمت عالی تبدیل کنید. فایل‌های شما هرگز دستگاه شما را ترک نمی‌کنند — همه چیز مستقیماً در مرورگر شما اتفاق می‌افتد.",
+  "browserBased": "تبدیل ۱۰۰٪ مبتنی بر مرورگر",
+  "convertNow": "اکنون PDF را تبدیل کنید",
+  "conversionResult": "نتیجه تبدیل",
+  "copy": "کپی",
+  "download": "دانلود",
+  "preview": "پیش‌نمایش",
+  "markdown": "Markdown",
+  "copiedToClipboard": "Markdown در کلیپ‌بورد کپی شد!",
+  "madeWith": "با ❤️ ساخته شده توسط",
+  "starOnGitHub": "اگر این ابزار را مفید یافتید، لطفاً در نظر بگیرید که آن را در GitHub ستاره دهید.",
+  "dragAndDrop": "فایل PDF خود را اینجا بکشید و رها کنید",
+  "orClickToSelect": "یا برای انتخاب فایل کلیک کنید",
+  "selectFile": "انتخاب فایل",
+  "converting": "در حال تبدیل...",
+  "uploadPDF": "آپلود PDF",
+  "maxFileSize": "حداکثر اندازه فایل: ۱۰MB",
+  "supportedFormats": "فرمت‌های پشتیبانی شده: PDF",
+  "language": "زبان"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "แปลง PDF ของคุณเป็น Markdown ที่สะอาด",
+  "description": "แปลงเอกสาร PDF เป็น Markdown ที่จัดรูปแบบอย่างสมบูรณ์แบบทันที ไฟล์ของคุณจะไม่ออกจากอุปกรณ์ของคุณ — ทุกอย่างเกิดขึ้นในเบราว์เซอร์ของคุณโดยตรง",
+  "browserBased": "การแปลงที่ใช้เบราว์เซอร์ 100%",
+  "convertNow": "แปลง PDF ตอนนี้",
+  "conversionResult": "ผลการแปลง",
+  "copy": "คัดลอก",
+  "download": "ดาวน์โหลด",
+  "preview": "ตัวอย่าง",
+  "markdown": "Markdown",
+  "copiedToClipboard": "คัดลอก Markdown ไปยังคลิปบอร์ดแล้ว!",
+  "madeWith": "สร้างด้วย ❤️ โดย",
+  "starOnGitHub": "หากคุณพบว่าเครื่องมือนี้มีประโยชน์ โปรดพิจารณาให้ดาวใน GitHub",
+  "dragAndDrop": "ลากและวางไฟล์ PDF ของคุณที่นี่",
+  "orClickToSelect": "หรือคลิกเพื่อเลือกไฟล์",
+  "selectFile": "เลือกไฟล์",
+  "converting": "กำลังแปลง...",
+  "uploadPDF": "อัปโหลด PDF",
+  "maxFileSize": "ขนาดไฟล์สูงสุด: 10MB",
+  "supportedFormats": "รูปแบบที่รองรับ: PDF",
+  "language": "ภาษา"
+}

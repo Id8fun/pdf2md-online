@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Upload, File, AlertCircle } from "lucide-react"
@@ -21,6 +22,7 @@ interface FileUploaderProps {
 }
 
 export function FileUploader({ onConversionComplete, isConverting, setIsConverting }: FileUploaderProps) {
+  const { t } = useTranslation()
   const [dragActive, setDragActive] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -68,7 +70,7 @@ export function FileUploader({ onConversionComplete, isConverting, setIsConverti
       if (file.type === "application/pdf") {
         handleFile(file)
       } else {
-        setError("Please upload a PDF file")
+        setError(t('supportedFormats'))
       }
     }
   }
@@ -82,7 +84,7 @@ export function FileUploader({ onConversionComplete, isConverting, setIsConverti
       if (file.type === "application/pdf") {
         handleFile(file)
       } else {
-        setError("Please upload a PDF file")
+        setError(t('supportedFormats'))
       }
     }
   }
@@ -90,7 +92,7 @@ export function FileUploader({ onConversionComplete, isConverting, setIsConverti
   const handleFile = (file: File) => {
     if (file.size > 10 * 1024 * 1024) {
       // 10MB limit
-      setError("File size exceeds 10MB limit")
+      setError(t('maxFileSize'))
       return
     }
 
@@ -156,8 +158,8 @@ export function FileUploader({ onConversionComplete, isConverting, setIsConverti
           </div>
 
           <div>
-            <h3 className="text-lg font-medium mb-1">Upload your PDF</h3>
-            <p className="text-sm text-muted-foreground mb-2">Drag and drop your file here or click to browse</p>
+            <h3 className="text-lg font-medium mb-1">{t('uploadPDF')}</h3>
+            <p className="text-sm text-muted-foreground mb-2">{t('dragAndDrop')} {t('orClickToSelect')}</p>
 
             {selectedFile && (
               <div className="flex items-center justify-center gap-2 text-sm font-medium text-primary">
@@ -170,17 +172,17 @@ export function FileUploader({ onConversionComplete, isConverting, setIsConverti
           {isConverting ? (
             <div className="w-full max-w-xs">
               <Progress value={progress} className="h-2 mb-2" />
-              <p className="text-xs text-muted-foreground">Converting... {progress}%</p>
+              <p className="text-xs text-muted-foreground">{t('converting')} {progress}%</p>
             </div>
           ) : (
             <div className="flex gap-4">
               <Button onClick={() => inputRef.current?.click()} disabled={isConverting}>
-                Select PDF
+                {t('selectFile')}
               </Button>
 
               {selectedFile && pdf2mdLoaded && (
                 <Button onClick={handleConvert} disabled={isConverting}>
-                  Convert to Markdown
+                  {t('convertNow')}
                 </Button>
               )}
             </div>

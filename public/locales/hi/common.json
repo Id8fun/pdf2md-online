@@ -1,0 +1,22 @@
+{
+  "title": "अपनी PDF को साफ Markdown में बदलें",
+  "description": "PDF दस्तावेजों को तुरंत पूर्ण रूप से स्वरूपित Markdown में परिवर्तित करें। आपकी फाइलें कभी भी आपके डिवाइस को नहीं छोड़तीं — सब कुछ सीधे आपके ब्राउज़र में होता है।",
+  "browserBased": "100% ब्राउज़र-आधारित रूपांतरण",
+  "convertNow": "अभी PDF परिवर्तित करें",
+  "conversionResult": "रूपांतरण परिणाम",
+  "copy": "कॉपी करें",
+  "download": "डाउनलोड करें",
+  "preview": "पूर्वावलोकन",
+  "markdown": "Markdown",
+  "copiedToClipboard": "Markdown क्लिपबोर्ड में कॉपी हो गया!",
+  "madeWith": "❤️ के साथ बनाया गया",
+  "starOnGitHub": "यदि आपको यह टूल उपयोगी लगा, तो कृपया इसे GitHub पर स्टार देने पर विचार करें।",
+  "dragAndDrop": "अपनी PDF फाइल यहाँ खींचें और छोड़ें",
+  "orClickToSelect": "या फाइल चुनने के लिए क्लिक करें",
+  "selectFile": "फाइल चुनें",
+  "converting": "परिवर्तित हो रहा है...",
+  "uploadPDF": "PDF अपलोड करें",
+  "maxFileSize": "अधिकतम फाइल आकार: 10MB",
+  "supportedFormats": "समर्थित प्रारूप: PDF",
+  "language": "भाषा"
+}
