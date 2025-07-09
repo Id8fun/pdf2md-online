@@ -50,210 +50,194 @@ export function MarkdownEditor({
   }
 
   const handleDownloadWord = () => {
-    // Create a temporary container to render the markdown with proper styling
-    const tempContainer = document.createElement('div')
-    tempContainer.style.position = 'absolute'
-    tempContainer.style.left = '-9999px'
-    tempContainer.style.top = '-9999px'
-    tempContainer.style.width = '210mm' // A4 width
-    tempContainer.style.padding = '25.4mm' // A4 margins
-    tempContainer.style.backgroundColor = 'white'
-    tempContainer.style.fontFamily = 'Calibri, Arial, sans-serif'
-    tempContainer.style.fontSize = '11pt'
-    tempContainer.style.lineHeight = '1.5'
-    tempContainer.style.color = '#000000'
-    
-    // Add Tailwind prose styles manually
-    tempContainer.innerHTML = `
-      <style>
-        .prose { max-width: none; }
-        .prose h1 { font-size: 18pt; font-weight: bold; color: #1f4e79; margin: 24pt 0 12pt 0; line-height: 1.3; }
-        .prose h2 { font-size: 14pt; font-weight: bold; color: #2f5597; margin: 18pt 0 6pt 0; line-height: 1.3; }
-        .prose h3 { font-size: 12pt; font-weight: bold; color: #1f4e79; margin: 12pt 0 6pt 0; line-height: 1.3; }
-        .prose h4, .prose h5, .prose h6 { font-size: 11pt; font-weight: bold; color: #1f4e79; margin: 12pt 0 3pt 0; line-height: 1.3; }
-        .prose p { margin: 0 0 6pt 0; text-align: justify; }
-        .prose ul, .prose ol { margin: 6pt 0; padding-left: 18pt; }
-        .prose li { margin-bottom: 3pt; }
-        .prose code { font-family: Consolas, 'Courier New', monospace; font-size: 10pt; background-color: #f2f2f2; padding: 1pt 3pt; border-radius: 2pt; border: 1pt solid #d4d4d4; }
-        .prose pre { font-family: Consolas, 'Courier New', monospace; font-size: 9pt; background-color: #f8f8f8; border: 1pt solid #d4d4d4; border-radius: 3pt; padding: 12pt; margin: 12pt 0; overflow-x: auto; line-height: 1.4; }
-        .prose pre code { background: none; border: none; padding: 0; font-size: inherit; }
-        .prose table { border-collapse: collapse; width: 100%; margin: 12pt 0; font-size: 10pt; }
-        .prose th, .prose td { border: 1pt solid #d4d4d4; padding: 6pt 8pt; text-align: left; vertical-align: top; }
-        .prose th { background-color: #f2f2f2; font-weight: bold; }
-        .prose a { color: #0563c1; text-decoration: underline; }
-        .prose strong { font-weight: bold; }
-        .prose em { font-style: italic; }
-        .prose blockquote { margin: 12pt 0; padding: 6pt 12pt; border-left: 3pt solid #d4d4d4; background-color: #f9f9f9; font-style: italic; }
-        .prose img { max-width: 100%; height: auto; margin: 6pt 0; }
-        .prose hr { border: none; border-top: 1pt solid #d4d4d4; margin: 18pt 0; }
-      </style>
-      <div class="prose"></div>
-    `
-    
-    const proseContainer = tempContainer.querySelector('.prose')
-    document.body.appendChild(tempContainer)
-
-    // Import ReactMarkdown and render
+    // 直接使用简化的HTML结构，避免复杂的React渲染
     import('react-markdown').then(({ default: ReactMarkdown }) => {
       import('remark-gfm').then(({ default: remarkGfm }) => {
+        // 创建临时容器来渲染markdown
+        const tempDiv = document.createElement('div')
+        tempDiv.style.position = 'absolute'
+        tempDiv.style.left = '-9999px'
+        tempDiv.style.visibility = 'hidden'
+        document.body.appendChild(tempDiv)
+        
+        // 使用React渲染markdown
         import('react-dom/client').then(({ createRoot }) => {
-          const root = createRoot(proseContainer!)
+          const root = createRoot(tempDiv)
           
-          // Render the markdown using the exact same configuration as MarkdownPreview
           root.render(
             React.createElement(ReactMarkdown, {
               remarkPlugins: [remarkGfm],
               components: {
-                pre: ({ node, ...props }) => React.createElement('pre', {
-                  ...props,
-                  className: 'overflow-x-auto p-4 bg-muted rounded-md my-4 text-sm [overflow-wrap:anywhere]'
+                // 简化组件，移除Tailwind类名
+                pre: ({ children, ...props }) => React.createElement('pre', props, children),
+                code: ({ children, inline, ...props }: any) => 
+                  React.createElement('code', { ...props, 'data-inline': inline }, children),
+                table: ({ children, ...props }) => React.createElement('table', props, children),
+                img: ({ src, alt, ...props }) => React.createElement('img', { 
+                  ...props, 
+                  src: src || '/placeholder.svg', 
+                  alt: alt 
                 }),
-                code: ({ node, inline, ...props }: any) => React.createElement('code', {
-                  ...props,
-                  className: inline
-                    ? 'bg-muted px-1 py-0.5 rounded break-words text-sm'
-                    : 'block overflow-x-auto [overflow-wrap:anywhere] text-sm'
-                }),
-                table: ({ children }) => React.createElement('div', {
-                  className: 'my-4 overflow-x-auto'
-                }, React.createElement('table', {
-                  className: 'min-w-full border-collapse border border-gray-300 table-auto'
-                }, children)),
-                img: ({ src, alt }) => React.createElement('div', {
-                  className: 'overflow-hidden'
-                }, React.createElement('img', {
-                  src: src || '/placeholder.svg',
-                  alt: alt,
-                  className: 'max-w-full h-auto'
-                })),
-                p: ({ children }) => React.createElement('p', {
-                  className: 'whitespace-pre-wrap break-words [overflow-wrap:anywhere]'
-                }, children),
-                a: ({ node, href, children }) => React.createElement('a', {
+                p: ({ children, ...props }) => React.createElement('p', props, children),
+                a: ({ href, children, ...props }) => React.createElement('a', { 
+                  ...props, 
                   href: href,
                   target: '_blank',
-                  rel: 'noopener noreferrer',
-                  className: 'break-words [overflow-wrap:anywhere]'
+                  rel: 'noopener noreferrer'
                 }, children)
               }
             }, markdown)
           )
           
-          // Wait for rendering to complete, then extract HTML
+          // 等待渲染完成后提取HTML
           setTimeout(() => {
-            const htmlContent = proseContainer!.innerHTML
+            const renderedHTML = tempDiv.innerHTML
             
-            // Clean up the temporary container
-            document.body.removeChild(tempContainer)
-             
-             const wordDocument = `<!DOCTYPE html>
-<html>
+            // 清理临时元素
+            document.body.removeChild(tempDiv)
+            
+            // 生成Word文档HTML
+            const wordDocument = `<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${fileName?.replace(/\.pdf$/i, "") || "Document"}</title>
   <style>
+    /* 页面设置 */
     @page {
       size: A4;
       margin: 2.54cm;
     }
     
+    /* 基础样式重置 */
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
     
+    /* 文档容器 */
     html, body {
+      font-family: 'Times New Roman', '宋体', serif;
+      font-size: 12pt;
+      line-height: 1.8;
+      color: #333;
+      background: white;
       margin: 0;
       padding: 0;
-      background: white;
-      font-family: 'Calibri', 'Arial', sans-serif;
-      font-size: 11pt;
-      line-height: 1.6;
-      color: #1a1a1a;
     }
     
     body {
-      max-width: 210mm;
+      max-width: 21cm;
       margin: 0 auto;
-      padding: 25.4mm;
+      padding: 2.54cm;
       background: white;
-      min-height: 100vh;
     }
     
-    /* Typography */
+    /* 标题样式 - 清晰的层次结构 */
     h1 {
-      font-size: 24px;
-      font-weight: 700;
-      color: #1e293b;
-      margin: 32px 0 16px 0;
-      line-height: 1.2;
-      border-bottom: 2px solid #e2e8f0;
-      padding-bottom: 8px;
+      font-size: 22pt;
+      font-weight: bold;
+      color: #1a1a1a;
+      text-align: center;
+      margin: 0 0 24pt 0;
+      padding-bottom: 12pt;
+      border-bottom: 2pt solid #333;
+      line-height: 1.3;
     }
     
     h2 {
-      font-size: 20px;
-      font-weight: 600;
-      color: #334155;
-      margin: 24px 0 12px 0;
-      line-height: 1.3;
+      font-size: 18pt;
+      font-weight: bold;
+      color: #2c3e50;
+      margin: 24pt 0 12pt 0;
+      padding-left: 0;
+      line-height: 1.4;
     }
     
     h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: #475569;
-      margin: 20px 0 10px 0;
-      line-height: 1.3;
+      font-size: 16pt;
+      font-weight: bold;
+      color: #34495e;
+      margin: 18pt 0 9pt 0;
+      padding-left: 12pt;
+      line-height: 1.4;
     }
     
-    h4, h5, h6 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #64748b;
-      margin: 16px 0 8px 0;
-      line-height: 1.3;
+    h4 {
+      font-size: 14pt;
+      font-weight: bold;
+      color: #5d6d7e;
+      margin: 15pt 0 6pt 0;
+      padding-left: 24pt;
+      line-height: 1.4;
     }
     
+    h5, h6 {
+      font-size: 12pt;
+      font-weight: bold;
+      color: #7b8794;
+      margin: 12pt 0 6pt 0;
+      padding-left: 36pt;
+      line-height: 1.4;
+    }
+    
+    /* 段落样式 */
     p {
-      margin: 0 0 16px 0;
-      line-height: 1.6;
+      margin: 0 0 12pt 0;
       text-align: justify;
+      text-indent: 2em;
+      line-height: 1.8;
       word-wrap: break-word;
-      overflow-wrap: break-word;
     }
     
-    /* Lists */
+    /* 列表样式 */
     ul, ol {
-      margin: 16px 0;
-      padding-left: 24px;
-      line-height: 1.6;
+      margin: 12pt 0 12pt 24pt;
+      padding-left: 24pt;
+      line-height: 1.8;
     }
     
     li {
-      margin-bottom: 8px;
+      margin-bottom: 6pt;
+      line-height: 1.8;
     }
     
-    /* Code */
-    code {
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-      font-size: 10pt;
-      background-color: #f1f5f9;
-      padding: 2px 6px;
-      border-radius: 4px;
-      border: 1px solid #e2e8f0;
-      word-break: break-all;
+    ul li {
+      list-style-type: disc;
+    }
+    
+    ol li {
+      list-style-type: decimal;
+    }
+    
+    /* 嵌套列表 */
+    ul ul, ol ol, ul ol, ol ul {
+      margin: 6pt 0 6pt 24pt;
+    }
+    
+    /* 代码样式 */
+    code[data-inline="true"] {
+      font-family: 'Courier New', 'Consolas', monospace;
+      font-size: 11pt;
+      background-color: #f5f5f5;
+      padding: 2pt 4pt;
+      border: 1pt solid #ddd;
+      border-radius: 3pt;
+      color: #d14;
     }
     
     pre {
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-family: 'Courier New', 'Consolas', monospace;
       font-size: 10pt;
-      background-color: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      padding: 16px;
-      margin: 16px 0;
+      background-color: #f8f8f8;
+      border: 1pt solid #ccc;
+      border-radius: 4pt;
+      padding: 12pt;
+      margin: 12pt 0;
+      line-height: 1.6;
       overflow-x: auto;
-      line-height: 1.5;
       white-space: pre-wrap;
       word-wrap: break-word;
     }
@@ -263,100 +247,117 @@ export function MarkdownEditor({
       border: none;
       padding: 0;
       font-size: inherit;
-      word-break: normal;
+      color: inherit;
     }
     
-    /* Tables */
+    /* 表格样式 */
     table {
-      border-collapse: collapse;
       width: 100%;
-      margin: 16px 0;
-      font-size: 10pt;
+      border-collapse: collapse;
+      margin: 12pt 0;
+      font-size: 11pt;
     }
     
     th, td {
-      border: 1px solid #d1d5db;
-      padding: 8px 12px;
+      border: 1pt solid #333;
+      padding: 8pt 12pt;
       text-align: left;
       vertical-align: top;
       word-wrap: break-word;
     }
     
     th {
-      background-color: #f9fafb;
-      font-weight: 600;
-      color: #374151;
+      background-color: #f0f0f0;
+      font-weight: bold;
+      text-align: center;
     }
     
-    /* Links */
+    /* 链接样式 */
     a {
-      color: #2563eb;
+      color: #0066cc;
       text-decoration: underline;
       word-break: break-all;
     }
     
-    /* Text formatting */
-    strong {
-      font-weight: 700;
+    /* 文本格式 */
+    strong, b {
+      font-weight: bold;
     }
     
-    em {
+    em, i {
       font-style: italic;
     }
     
-    /* Blockquotes */
+    /* 引用块 */
     blockquote {
-      margin: 16px 0;
-      padding: 12px 16px;
-      border-left: 4px solid #d1d5db;
-      background-color: #f9fafb;
+      margin: 12pt 0 12pt 24pt;
+      padding: 12pt 18pt;
+      border-left: 4pt solid #ccc;
+      background-color: #f9f9f9;
       font-style: italic;
-      color: #6b7280;
+      color: #666;
+      line-height: 1.8;
     }
     
-    /* Images */
+    /* 图片 */
     img {
       max-width: 100%;
       height: auto;
-      margin: 16px 0;
-      border-radius: 4px;
+      margin: 12pt 0;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     
-    /* Horizontal rules */
+    /* 分隔线 */
     hr {
       border: none;
-      border-top: 1px solid #e5e7eb;
-      margin: 24px 0;
+      border-top: 1pt solid #ccc;
+      margin: 24pt 0;
     }
     
+    /* 打印样式 */
     @media print {
       body {
-        padding: 0;
         margin: 0;
+        padding: 0;
       }
       
       @page {
         margin: 2.54cm;
       }
+      
+      h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+      }
+      
+      p, li {
+        page-break-inside: avoid;
+      }
+      
+      table {
+        page-break-inside: avoid;
+      }
     }
   </style>
 </head>
 <body>
-${htmlContent}
+${renderedHTML}
 </body>
 </html>`
-              
-              const element = document.createElement("a")
-              const file = new Blob([wordDocument], { type: "application/msword" })
-              element.href = URL.createObjectURL(file)
-              element.download = (fileName?.replace(/\.pdf$/i, "") || "document") + ".doc"
-              document.body.appendChild(element)
-              element.click()
-              document.body.removeChild(element)
-            }, 100)
-          })
+            
+            // 下载文件
+            const element = document.createElement("a")
+            const file = new Blob([wordDocument], { type: "application/msword;charset=utf-8" })
+            element.href = URL.createObjectURL(file)
+            element.download = (fileName?.replace(/\.pdf$/i, "") || "document") + ".doc"
+            document.body.appendChild(element)
+            element.click()
+            document.body.removeChild(element)
+          }, 200)
         })
       })
+    })
   }
 
   return (
