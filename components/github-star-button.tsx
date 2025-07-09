@@ -16,7 +16,7 @@ export function GitHubStarButton({
     <Button
       variant="outline"
       size="sm"
-      className={`flex items-center gap-2 transition-all hover:bg-slate-100 dark:hover:bg-slate-800 ${className}`}
+      className={`flex items-center gap-2 transition-all hover:bg-slate-100 dark:hover:bg-slate-800 text-black dark:text-white ${className}`}
       onClick={() => window.open(repoUrl, "_blank", "noopener,noreferrer")}
     >
       <Github className="h-4 w-4" />

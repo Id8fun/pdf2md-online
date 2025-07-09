@@ -25,31 +25,50 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-transparent to-gray-50/50 dark:to-gray-900/20">
-      <div className="container mx-auto py-16 px-4 max-w-4xl">
+    <main className="min-h-screen relative">
+      {/* Dynamic Gradient Background */}
+      <div className="gradient-bg">
+        <svg className="fixed top-0 left-0 w-0 h-0">
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+              <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+          </defs>
+        </svg>
+        <div className="gradients-container">
+          <div className="g1"></div>
+          <div className="g2"></div>
+          <div className="g3"></div>
+          <div className="g4"></div>
+          <div className="g5"></div>
+          <div className="interactive"></div>
+        </div>
+      </div>
+      
+      <div className="container mx-auto py-16 px-4 max-w-4xl relative z-10">
         {/* Language Switcher */}
         <div className="flex justify-end mb-8">
           {isClient && <LanguageSwitcher />}
         </div>
         <div className="relative">
-          {/* Top accent line with gradient */}
-          <div className="absolute -top-16 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-800 to-transparent" />
           
           {/* Header content */}
           <div className="space-y-8">
             <div className="flex flex-col items-center text-center">
-              <div className="inline-flex items-center px-4 py-1.5 mb-6 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
+              <div className="inline-flex items-center px-4 py-1.5 mb-6 rounded-full text-xs font-medium bg-white/20 backdrop-blur-sm text-white border border-white/30">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   {isClient ? t('browserBased') : '100% browser-based conversion'}
                 </span>
               </div>
               
-              <h1 className="text-5xl font-bold tracking-tight text-center bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-600 dark:from-white dark:via-gray-300 dark:to-gray-500 mb-4 max-w-2xl">
+              <h1 className="text-5xl font-bold tracking-tight text-center text-white drop-shadow-lg mb-4 max-w-2xl">
                 {isClient ? t('title') : 'Transform Your PDFs into Clean Markdown'}
               </h1>
               
-              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-xl mb-8">
+              <p className="text-lg text-white/90 drop-shadow-md max-w-xl mb-8">
                 {isClient ? t('description') : 'Instantly convert PDF documents to perfectly formatted Markdown. Your files never leave your device — everything happens right in your browser.'}
               </p>
               
@@ -89,10 +108,10 @@ export default function Home() {
             <div className="space-y-6">
               <div className="flex justify-between items-center mb-8">
                 <div className="space-y-1">
-                  <h2 className="text-2xl font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400">
+                  <h2 className="text-2xl font-semibold tracking-tight text-white drop-shadow-lg">
                     {isClient ? t('conversionResult') : 'Conversion Result'}
                   </h2>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-white/70 drop-shadow-md">
                     {fileName?.replace(/\.pdf$/i, '')}
                   </p>
                 </div>
@@ -172,12 +191,12 @@ export default function Home() {
           <FaqSection />
         </div>
 
-        <footer className="mt-20 text-center text-sm text-gray-500 dark:text-gray-400">
+        <footer className="mt-20 text-center text-sm text-white/80 drop-shadow-md">
           <div className="flex justify-center mb-4">
             <GitHubStarButton />
           </div>
           <p>
-            {isClient ? t('madeWith') : 'Made with ❤️ by'} <a href="https://twitter.com/0xlauyu" target="_blank" rel="noopener noreferrer" className="text-gray-900 dark:text-white hover:underline">@0xlauyu</a>. {isClient ? t('starOnGitHub') : 'If you found this tool helpful, please consider starring it on GitHub.'}
+            {isClient ? t('madeWith') : 'Made with ❤️ by'} <a href="https://twitter.com/0xlauyu" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 hover:underline font-medium">@0xlauyu</a>. {isClient ? t('starOnGitHub') : 'If you found this tool helpful, please consider starring it on GitHub.'}
           </p>
         </footer>
       </div>
