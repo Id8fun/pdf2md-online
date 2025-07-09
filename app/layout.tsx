@@ -42,29 +42,26 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'PDF2MD - Transform Your PDFs into Clean Markdown',
-    description:
-      'Convert PDF documents to perfectly formatted Markdown instantly in your browser. 100% privacy-focused: files never leave your device. Free unlimited conversions with professional-grade formatting.',
-    url: 'https://pdf2md.id8.fun/',
+    description: 'Instantly convert PDF documents to perfectly formatted Markdown. 100% browser-based conversion with OCR support.',
+    url: 'https://pdf2md.id8.fun',
     siteName: 'PDF2MD',
-    type: 'website',
-    locale: 'en_US',
     images: [
       {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'PDF to Markdown Converter',
+        alt: 'PDF2MD - PDF to Markdown Converter',
       },
     ],
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PDF2MD - Transform Your PDFs into Clean Markdown',
-    description:
-      'Convert PDF documents to perfectly formatted Markdown instantly in your browser. 100% privacy-focused: files never leave your device. Free unlimited conversions with professional-grade formatting.',
+    description: 'Instantly convert PDF documents to perfectly formatted Markdown. 100% browser-based conversion with OCR support.',
     images: ['/logo.png'],
     creator: '@0xlauyu',
-    site: '@0xlauyu',
   },
   icons: {
     icon: '/logo.ico',

@@ -18,44 +18,31 @@ export function ShareButton({ className }: ShareButtonProps) {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
   const shareTitle = 'PDF2MD - Transform Your PDFs into Clean Markdown'
   const shareDescription = 'Instantly convert PDF documents to perfectly formatted Markdown. 100% browser-based conversion.'
-  const shareImage = `${typeof window !== 'undefined' ? window.location.origin : ''}/logo.png`
-
+  
   const shareLinks = [
     {
       name: 'Instagram',
-      icon: '📷',
-      url: `https://www.instagram.com/`,
-      color: 'bg-gradient-to-r from-purple-500 to-pink-500'
+      url: `https://www.instagram.com/`
     },
     {
       name: 'X (Twitter)',
-      icon: '𝕏',
-      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(currentUrl)}`,
-      color: 'bg-black'
+      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(currentUrl)}`
     },
     {
       name: 'Discord',
-      icon: '💬',
-      url: `https://discord.com/channels/@me`,
-      color: 'bg-indigo-600'
+      url: `https://discord.com/channels/@me`
     },
     {
       name: 'Telegram',
-      icon: '✈️',
-      url: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareTitle)}`,
-      color: 'bg-blue-500'
+      url: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareTitle)}`
     },
     {
       name: 'Facebook',
-      icon: '📘',
-      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
-      color: 'bg-blue-600'
+      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`
     },
     {
       name: 'WeChat',
-      icon: '💬',
-      url: '#',
-      color: 'bg-green-500'
+      url: '#'
     }
   ]
 
@@ -73,7 +60,7 @@ export function ShareButton({ className }: ShareButtonProps) {
     }
 
     // Try native sharing first (mobile)
-    if (navigator.share && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (typeof navigator !== 'undefined' && navigator.share && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       try {
         await navigator.share({
           title: shareTitle,
@@ -101,7 +88,7 @@ export function ShareButton({ className }: ShareButtonProps) {
   }
 
   const handleNativeShare = async () => {
-    if (navigator.share) {
+    if (typeof navigator !== 'undefined' && navigator.share) {
       try {
         await navigator.share({
           title: shareTitle,
@@ -133,7 +120,7 @@ export function ShareButton({ className }: ShareButtonProps) {
           {typeof navigator !== 'undefined' && navigator.share && (
             <Button
               onClick={handleNativeShare}
-              className="w-full h-12 bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700"
+              className="w-full h-10 bg-gray-100 hover:bg-gray-200 text-gray-900 border border-gray-300"
             >
               <Share2 className="mr-2 h-4 w-4" />
               Share via System
@@ -141,14 +128,14 @@ export function ShareButton({ className }: ShareButtonProps) {
           )}
           
           {/* Social Media Platforms */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-2">
             {shareLinks.map((platform) => (
               <Button
                 key={platform.name}
                 onClick={() => handleShare(platform.name, platform.url)}
-                className={`h-12 text-white hover:opacity-90 transition-opacity ${platform.color}`}
+                variant="outline"
+                className="h-10 justify-start text-gray-700 hover:bg-gray-50"
               >
-                <span className="mr-2 text-lg">{platform.icon}</span>
                 {platform.name}
               </Button>
             ))}
@@ -159,7 +146,7 @@ export function ShareButton({ className }: ShareButtonProps) {
             <Button
               onClick={copyToClipboard}
               variant="outline"
-              className="w-full h-12"
+              className="w-full h-10"
             >
               {copiedUrl ? (
                 <>
