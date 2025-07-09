@@ -130,7 +130,7 @@ export function ShareButton({ className }: ShareButtonProps) {
         </DialogHeader>
         <div className="space-y-4">
           {/* Native Share Button (Mobile) */}
-          {navigator.share && (
+          {typeof navigator !== 'undefined' && navigator.share && (
             <Button
               onClick={handleNativeShare}
               className="w-full h-12 bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700"
