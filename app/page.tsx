@@ -6,7 +6,7 @@ import { FileUploader } from "@/components/file-uploader"
 import { MarkdownPreview } from "@/components/markdown-preview"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { FileText, Code, ArrowRight, Edit } from "lucide-react"
+import { FileText, Code, ArrowRight, Edit, Twitter } from "lucide-react"
 import { FaqSection } from "@/components/faq-section"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { GitHubStarButton } from "@/components/github-star-button"
@@ -207,9 +207,20 @@ export default function Home() {
           <div className="flex justify-center mb-4">
             <GitHubStarButton />
           </div>
-          <p>
-            {isClient ? t('madeWith') : 'Made with ❤️ by'} <a href="https://twitter.com/0xlauyu" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 hover:underline font-medium">@0xlauyu</a>. {isClient ? t('starOnGitHub') : 'If you found this tool helpful, please consider starring it on GitHub.'}
+          <p className="mb-4">
+            I continue to build this project based on Michael Ryaboy's open source project, thanks for open source
           </p>
+          <div className="flex justify-center">
+            <a 
+              href="https://twitter.com/0xlauyu" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-200 hover:scale-105"
+            >
+              <Twitter className="h-4 w-4" />
+              <span className="font-medium">@0xlauyu</span>
+            </a>
+          </div>
         </footer>
       </div>
       
